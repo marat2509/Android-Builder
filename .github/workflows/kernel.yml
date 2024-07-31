@@ -77,7 +77,6 @@ jobs:
       - name: ♈ Cleanup
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 512
           remove-dotnet: "true"
           remove-haskell: "true"
           remove-codeql: "true"
