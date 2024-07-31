@@ -5,6 +5,12 @@ on:
     paths:
       - ".github/workflows/kernel.yml"
   workflow_dispatch:
+    inputs:
+        debug_enabled:
+          type: boolean
+          description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+          required: false
+          default: false
   schedule:
     - cron: "14 13 * * 5"
 
@@ -299,6 +305,7 @@ jobs:
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
 
       - name: 👍 Start building the kernel
         working-directory: ${{ env.KERNEL_NAME }}
