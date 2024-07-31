@@ -293,6 +293,9 @@ jobs:
             echo "🎖️ Apply xt_qtaguid.patch"
           fi
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: 👍 Start building the kernel
         working-directory: ${{ env.KERNEL_NAME }}
         env:
