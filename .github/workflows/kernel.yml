@@ -74,6 +74,15 @@ jobs:
       OUT_DIR: "${{ github.workspace }}/out"
       CCACHE_DIR: "${{ github.workspace }}/ccache"
     steps:
+      - name: ♈ Cleanup
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          remove-dotnet: "true"
+          remove-haskell: "true"
+          remove-codeql: "true"
+          remove-docker-images: "true"
+
       # Set swap space
       - name: 📐 Set swap to 10G
         uses: pierotofy/set-swap-space@master
