@@ -9,27 +9,53 @@
       },
       "toolchains": [
       {
-        "repo": "https://github.com/LineageOS/android_prebuilts_clang_kernel_linux-x86_clang-r416183b",
-        "branch": "lineage-20.0",
-        "name": "clang",
+        "repo": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86",
+        "branch": "android-14.0.0_r53",
+        "name": "tc-clang",
         "binaryEnv": [
-          "bin"
+          "clang-r487747c/bin",
+          "llvm-binutils-stable"
         ]
       },
       {
-        "repo": "https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9",
-        "branch": "lineage-19.1",
-        "name": "aarch64",
+        "repo": "https://github.com/LineageOS/android_prebuilts_tools-lineage",
+        "branch": "lineage-21.0",
+        "name": "tc-tools",
         "binaryEnv": [
-          "bin"
+          "linux-x86/bin"
         ]
       },
       {
         "repo": "https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9",
         "branch": "lineage-19.1",
-        "name": "arm",
+        "name": "tc-gcc",
         "binaryEnv": [
-          "bin"
+            "bin"
+        ]
+      },
+      {
+        "repo": "https://android.googlesource.com/kernel/prebuilts/build-tools",
+        "branch": "android-14.0.0_r0.53",
+        "name": "tc-kernel-build-tools",
+        "binaryEnv": [
+            "linux-x86/bin"
+        ]
+      },
+      {
+        "repo": "https://github.com/crdroidandroid/android_prebuilts_build-tools",
+        "branch": "14.0",
+        "name": "tc-build-tools",
+        "binaryEnv": [
+            "linux-x86/bin"
+        ]
+      },
+      {
+        "repo": "https://android.googlesource.com/platform/prebuilts/misc",
+        "branch": "android-14.0.0_r53",
+        "name": "tc-misc",
+        "binaryEnv": [
+            "linux-x86/dtc",
+            "linux-x86/libufdt"
         ]
       }
     ],
@@ -38,21 +64,20 @@
       "ARCH": "arm64",
       "CC": "clang",
       "externalCommands": {
-        "CLANG_TRIPLE": "aarch64-linux-gnu-",
-        "CROSS_COMPILE": "aarch64-linux-android-",
-        "CROSS_COMPILE_ARM32": "arm-linux-androideabi-",
-        "LD": "ld.lld",
-        "AR": "llvm-ar",
-        "NM": "llvm-nm",
-        "OBJCOPY": "llvm-objcopy",
-        "OBJDUMP": "llvm-objdump",
-        "READELF": "llvm-readelf",
-        "OBJSIZE": "llvm-size",
-        "STRIP": "llvm-strip",
-        "LDGOLD": "aarch64-linux-gnu-ld.gold",
-        "LLVM_AR": "llvm-ar",
-        "LLVM_DIS": "llvm-dis",
-        "CONFIG_THINLTO": "y"
+        "HOSTCC": "tc-clang/clang-r487747c/bin/clang",
+        "HOSTCXX": "tc-clang/clang-r487747c/bin/clang++",
+        "LD": "tc-clang/clang-r487747c/bin/ld",
+        "AR": "tc-clang/clang-r487747c/bin/llvm-ar",
+        "LLVM": "1",
+        "LLVM_IAS": "1",
+        "LZ4": "tc-kernel-build-tools/linux-x86/bin/lz4",
+        "LEX": "tc-build-tools/linux-x86/bin/flex",
+        "YACC": "tc-build-tools/linux-x86/bin/bison",
+        "M4": "tc-build-tools/linux-x86/bin/m4",
+        "CROSS_COMPILE": "tc-gcc/bin/aarch64-linux-android-",
+        "CROSS_COMPILE_ARM32": "tc-gcc/bin/arm-linux-androidkernel-",
+        "CROSS_COMPILE_COMPAT": "tc-gcc/bin/arm-linux-androidkernel-",
+        "CLANG_TRIPLE": "aarch64-linux-gnu-"
       }
     },
     "AnyKernel3": {
